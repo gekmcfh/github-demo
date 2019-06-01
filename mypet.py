@@ -77,7 +77,8 @@ def main():
         if Choise=="0":
             print("Good-bye.")
         elif Choise=="1":
-            crit.talk()
+            x=input("Write a pet's name to talk to him.")
+            Critter.critterlist[x].talk()
         #listen to your critter
         elif Choise=="2":
             print()
