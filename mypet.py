@@ -3,7 +3,7 @@
 class Critter(object):
     """Virtual pet"""
     total = 0
-    critterlist = []
+    critterlist = {}
     @staticmethod
     def zoostatus():
         print("Total animals now: ",Critter.total,". These animals are in the zoo now: ",Critter.critterlist)
@@ -18,7 +18,7 @@ class Critter(object):
         self.hunger=hunger
         self.boredom=boredom
         Critter.total+=1
-        Critter.critterlist.append(self.name)
+        Critter.critterlist[self.name]=self
         print("New critter",self.name,",",self.type," has been borned.")
     def __pass_time(self):
         self.hunger+=1
@@ -52,7 +52,7 @@ class Critter(object):
         self.__pass_time()
 def new():
     name=input("Enter a pet name.")
-    name=input("Who will the critter in life?")
+    type=input("Who will the critter in life?")
     return Critter(name,type)
 
 def main():
@@ -94,7 +94,8 @@ def main():
             new()
         #secret option
         elif Choise=="50":
-            print(crit)
+            x=input("Enter pet number to get his status:")
+            print(Critter.critterlist[x])
         #some unknown choise
         else:
             print("Sorry,but",Choise,"is not a valid choise.")
