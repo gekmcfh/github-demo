@@ -58,11 +58,17 @@ def list():
     for i,k in enumerate(Critter.critterlist,1):
         print(i,k)
     guess=None
+    guesslist=None
     while guess==None:
-        guess=int(input("Выберите питомца, указав соответствующую цифру:"))
+        guess=int(input("Выберите питомца, указав соответствующую цифру, либо 0 чтобы перебрать всех:"))
         for i, k in enumerate(Critter.critterlist, 1):
             if guess == i:
-                return Critter.critterlist[k]
+                guesslist.append(Critter.critterlist[k])
+                return guesslist
+                # return Critter.critterlist[k]
+            elif guess == 0:
+                guesslist.append(Critter.critterlist[k])
+        return guesslist
 
 def main():
     new()
@@ -87,7 +93,8 @@ def main():
             print("Good-bye.")
         elif Choise=="1":
             # x=input("Write a pet's name to talk to him.")
-            list().talk()
+            for i in list():
+                i.talk()
         #listen to your critter
         elif Choise=="2":
             print()
