@@ -58,7 +58,7 @@ def list():
     for i,k in enumerate(Critter.critterlist,1):
         print(i,k)
     guess=None
-    guesslist=None
+    guesslist=[]
     while guess==None:
         guess=int(input("Выберите питомца, указав соответствующую цифру, либо 0 чтобы перебрать всех:"))
         for i, k in enumerate(Critter.critterlist, 1):
@@ -99,11 +99,13 @@ def main():
         elif Choise=="2":
             print()
             food_quantity=int(input("Сколько порций скормить?"))
-            list().eat(food_quantity)
+            for i in list():
+                i.eat(food_quantity)
         #feed your critter
         elif Choise=="3":
             play_quantity=int(input("Сколько минут потратить на игру?"))
-            list().play(play_quantity)
+            for i in list():
+                i.play(play_quantity)
         #view the whole zoo
         elif Choise=="4":
             Critter.zoostatus()
@@ -111,8 +113,8 @@ def main():
             new()
         #secret option
         elif Choise=="50":
-            x=input("Enter pet number to get his status:")
-            print(Critter.critterlist[x])
+            for i in list():
+                print(i)
         #some unknown choise
         else:
             print("Sorry,but",Choise,"is not a valid choise.")
