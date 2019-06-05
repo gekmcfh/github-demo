@@ -45,7 +45,7 @@ class Critter(object):
             self.hunger=0
         self.__pass_time()
     def play(self,fun=4):
-        print("Whee!"*fun)
+        print(self.name,":","Whee!"*fun)
         self.boredom-=fun
         if self.boredom<0:
             self.boredom=0
