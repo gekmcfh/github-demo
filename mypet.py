@@ -7,11 +7,13 @@ class Critter(object):
     @staticmethod
     def zoostatus():
         print("Total animals now: ",Critter.total,". These animals are in the zoo now: ",Critter.critterlist)
+
     def __str__(self):
         reply="Я, "+self.type+", моя погремуха -"+self.name+" - я объект класса Critter.\n"
         reply+="Мой уровень голода:"+str(self.hunger)
         reply+="\nМой уровень скуки:"+str(self.boredom)
         return reply
+
     def __init__(self,name,type,hunger=0,boredom=0):
         self.name=name
         self.type=type
@@ -20,10 +22,12 @@ class Critter(object):
         Critter.total+=1
         Critter.critterlist[self.name]=self
         print("New critter",self.name,",",self.type," has been borned.")
+
     def __pass_time(self):
         self.hunger+=1
         self.boredom+=1
     @property
+
     def mood(self):
         unhappiness = self.hunger+self.boredom
         if unhappiness < 5:
@@ -35,28 +39,35 @@ class Critter(object):
         else:
             m="terrible"
         return m
+
     def talk(self):
         print("My name is",self.name,", and right now i feel",self.mood)
         self.__pass_time()
+
     def eat(self,food=4):
         print("Brruppp "*food," Thank you.")
         self.hunger-=food
         if self.hunger<0:
             self.hunger=0
         self.__pass_time()
+
     def play(self,fun=4):
         print(self.name,":","Whee!"*fun)
         self.boredom-=fun
         if self.boredom<0:
             self.boredom=0
         self.__pass_time()
+
+
 def new():
     name=input("Enter a pet name:")
     type=input("Who will the critter in life?")
     return Critter(name,type)
+
+
 def list():
-    for i,k in enumerate(Critter.critterlist,1):
-        print(i,k)
+    for i, k in enumerate(Critter.critterlist,1):
+        print(i, k)
     guess=None
     guesslist=[]
     while guess==None:
@@ -96,23 +107,23 @@ def main():
             for i in list():
                 i.talk()
         #listen to your critter
-        elif Choise=="2":
+        elif Choise == "2":
             print()
             food_quantity=int(input("Сколько порций скормить?"))
             for i in list():
                 i.eat(food_quantity)
         #feed your critter
-        elif Choise=="3":
+        elif Choise == "3":
             play_quantity=int(input("Сколько минут потратить на игру?"))
             for i in list():
                 i.play(play_quantity)
         #view the whole zoo
-        elif Choise=="4":
+        elif Choise == "4":
             Critter.zoostatus()
-        elif Choise=="5":
+        elif Choise == "5":
             new()
         #secret option
-        elif Choise=="50":
+        elif Choise == "50":
             for i in list():
                 print(i)
         #some unknown choise

@@ -15,6 +15,7 @@ class Card(object):
         rep = self.rank + self.suit
         return rep
 
+
 class Hand(object):
     """A hand of playing cards."""
     def __init__(self):
@@ -24,7 +25,7 @@ class Hand(object):
         if self.cards:
             rep = ""
             for card in self.cards:
-                rep+=str(card) + " "
+                rep += str(card) + " "
         else:
             rep =  "<empty>"
         return rep
@@ -41,13 +42,17 @@ class Hand(object):
 
 class Deck(Hand):
     """A hand of playing cards."""
+
     def populate(self):
         self.cards = []
-        for suit in Card.RANKS:
-            self.add(Card(rank,suit))
+        for suit in Card.SUITS:
+            for rank in Card.RANKS:
+                self.add(Card(rank,suit))
+
     def shuffle(self):
         import random
         random.shuffle(self.cards)
+
     def deal (self,hands,per_hand = 1):
         for rounds in range(per_hand):
             for hand in hands:
@@ -57,8 +62,41 @@ class Deck(Hand):
                 else:
                     print("Cannot continue deal! Out of cards.")
 
-# main
-deck1 = Deck()
-print("Created a new deck.")
-print("There is a deck:")
-print(deck1)
+
+class Unprintable_Card(Card):
+    """A card, that won't reveal its rank or suit when printed."""
+    def __str__(self):
+        return "<unprintable>"
+
+
+class Positionable_Card(Card):
+    """A card that can be face up or face down."""
+    def __init__(self,rank,suit,face_up=True):
+        super(Positionable_Card,self).__init__(rank,suit)
+        self.is_face_up = face_up
+
+    def __str__(self):
+        if self.is_face_up:
+            rep = super(Positionable_Card,self).__str__()
+        else:
+            rep = "XX"
+        return rep
+
+    def flip(self):
+        self.is_face_up = not self.is_face_up
+
+
+#main
+card1 = Card("A","c")
+card2 = Unprintable_Card("A","d")
+card3 = Positionable_Card("A","h")
+
+print("Печатаю объект Card:")
+print(card1)
+print("Печатаю объект Unprintable_Card:")
+print(card2)
+print("Печатаю объект Positionable_Card:")
+print(card3)
+print("переворачиваю объект Positionable_Card:")
+card3.flip()
+print(card3)
